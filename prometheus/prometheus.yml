@@ -1,0 +1,16 @@
+scrape_configs:
+  - job_name: 'sample-spring-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets: ['sample-spring-service:8091']
+
+rule_files:
+  - 'alerts.yml'
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      path_prefix: /
+      static_configs:
+        - targets: ['alertmanager:9093']
